@@ -1,0 +1,155 @@
+---
+import "../styles/fonts.css";
+import "../styles/global.css";
+
+import montW700 from "@fontsource/montserrat/files/montserrat-latin-700-normal.woff2?url";
+import montW800 from "@fontsource/montserrat/files/montserrat-latin-800-normal.woff2?url";
+import manW400 from "@fontsource/manrope/files/manrope-latin-400-normal.woff2?url";
+import manW700 from "@fontsource/manrope/files/manrope-latin-700-normal.woff2?url";
+
+import SEO from "../components/SEO.astro";
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+import WhatsAppFloat from "../components/WhatsAppFloat.astro";
+
+interface Props {
+  title?: string;
+  description?: string;
+}
+
+const { title, description } = Astro.props;
+---
+
+<SEO {title} {description}>
+  <slot name="head" slot="head" />
+  <link slot="head" rel="preload" href={montW700} as="font" type="font/woff2" crossorigin />
+  <link slot="head" rel="preload" href={montW800} as="font" type="font/woff2" crossorigin />
+  <link slot="head" rel="preload" href={manW400} as="font" type="font/woff2" crossorigin />
+  <link slot="head" rel="preload" href={manW700} as="font" type="font/woff2" crossorigin />
+  <link slot="head" rel="preload" href="/fondo.webp" as="image" type="image/webp" fetchpriority="high" />
+</SEO>
+
+<a class="skip-link" href="#contenido">Saltar al contenido principal</a>
+
+<Header />
+<div id="scroll-sentinel" aria-hidden="true" style="position:absolute;top:9px;left:0;width:1px;height:1px;pointer-events:none;"></div>
+
+<main id="contenido">
+  <slot />
+</main>
+
+<Footer />
+<WhatsAppFloat />
+
+<script>
+  const header = document.querySelector(".site-header");
+  const sentinel = document.getElementById("scroll-sentinel");
+  if (header && sentinel && "IntersectionObserver" in window) {
+    const io = new IntersectionObserver(([e]) => header.classList.toggle("is-scrolled", !e.isIntersecting), { threshold: 0 });
+    io.observe(sentinel);
+  } else {
+    let ticking = false;
+    const upd = () => { header?.classList.toggle("is-scrolled", window.scrollY > 8); ticking = false; };
+    const onScroll = () => { if (!ticking) { ticking = true; requestAnimationFrame(upd); } };
+    upd();
+    window.addEventListener("scroll", onScroll, { passive: true });
+  }
+  const toggle = document.querySelector(".nav-toggle");
+  const navLinks = document.querySelector(".nav-links");
+  toggle?.addEventListener("click", () => {
+    const open = navLinks?.classList.toggle("open") ?? false;
+    toggle?.setAttribute("aria-expanded", String(open));
+    toggle?.setAttribute("aria-label", open ? "Cerrar menú" : "Abrir menú");
+  });
+  navLinks?.addEventListener("click", (e) => {
+    if (e.target.closest("a")) {
+      navLinks.classList.remove("open");
+      toggle?.setAttribute("aria-expanded", "false");
+      toggle?.setAttribute("aria-label", "Abrir menú");
+    }
+  });
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape" && navLinks?.classList.contains("open")) {
+      navLinks.classList.remove("open");
+      toggle?.setAttribute("aria-expanded", "false");
+      toggle?.setAttribute("aria-label", "Abrir menú");
+      toggle?.focus();
+    }
+  });
+</script>
+
+<script>
+  const idle = (cb) => {
+    if ("requestIdleCallback" in window) requestIdleCallback(cb, { timeout: 2000 });
+    else setTimeout(cb, 1);
+  };
+  idle(() => {
+    const els = document.querySelectorAll(".reveal");
+    if ("IntersectionObserver" in window && !matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      const io = new IntersectionObserver(
+        (entries) => {
+          for (const e of entries) if (e.isIntersecting) { e.target.classList.add("is-in"); io.unobserve(e.target); }
+        },
+        { threshold: 0.12, rootMargin: "0px 0px -40px 0px" }
+      );
+      els.forEach((el) => io.observe(el));
+    } else els.forEach((el) => el.classList.add("is-in"));
+  });
+  idle(() => {
+    const form = document.querySelector("#contact-form");
+    if (!form) return;
+    let bound = false;
+    const bind = () => {
+      if (bound) return;
+      bound = true;
+      const statusEl = document.querySelector("#form-status");
+      const submitBtn = document.querySelector("#form-submit");
+      const waBase = form.dataset.waBase || "https://wa.me/5491127846735";
+      const waDefault = form.dataset.waDefault;
+      const endpoint = form.dataset.endpoint;
+      const subject = form.dataset.subject;
+      const buildWa = (msg) => `${waBase.split("?")[0]}?text=${encodeURIComponent(msg)}`;
+      const setStatus = (k, h) => { if (statusEl) { statusEl.className = `form-status ${k}`; statusEl.innerHTML = h; } };
+      form.addEventListener("submit", async (e) => {
+        e.preventDefault();
+        if (!form.checkValidity()) { form.reportValidity(); return; }
+        const data = new FormData(form);
+        const rawNombre = (data.get("Nombre")?.toString().trim() || "Sin nombre");
+        const nombreCompleto = rawNombre.split(/\s+/).map(w=>w.charAt(0).toUpperCase()+w.slice(1).toLowerCase()).join(" ");
+        const dynamicSubject = `Nuevo mensaje de ${nombreCompleto} desde el sitio web`;
+        data.append("_subject", dynamicSubject);
+        data.append("_template", "table");
+        if (submitBtn) { submitBtn.disabled = true; submitBtn.textContent = "Enviando…"; }
+        try {
+          const isAppsScript = endpoint && endpoint.includes("script.google.com");
+          if (isAppsScript) {
+            await fetch(endpoint, { method: "POST", body: data, mode: "no-cors" });
+            const n = (data.get("Nombre")?.toString().trim().split(" ")[0]) || "";
+            const wl = buildWa(`Hola \uD83D\uDC4B Soy ${n || "…"} y acabo de enviarles un mensaje por el sitio web.`);
+            setStatus("ok", `<strong>\u00A1Mensaje enviado!</strong> Te respondemos en menos de 24 h h\u00E1biles. \u00BFTen\u00E9s urgencia? <a class="wa-link" href="${wl}" target="_blank" rel="noopener noreferrer">Av\u00EDsanos por WhatsApp</a>.`);
+            form.reset();
+          } else {
+            const res = await fetch(endpoint, { method: "POST", body: data, headers: { Accept: "application/json" } });
+            const j = await res.json().catch(() => ({ success: res.ok ? "true" : "false" }));
+            if (j.success === "true" || res.ok) {
+            const n = (data.get("Nombre")?.toString().trim().split(" ")[0]) || "";
+            const wl = buildWa(`Hola \uD83D\uDC4B Soy ${n || "…"} y acabo de enviarles un mensaje por el sitio web.`);
+            setStatus("ok", `<strong>\u00A1Mensaje enviado!</strong> Te respondemos en menos de 24 h h\u00E1biles. \u00BFTen\u00E9s urgencia? <a class="wa-link" href="${wl}" target="_blank" rel="noopener noreferrer">Av\u00EDsanos por WhatsApp</a>.`);
+            form.reset();
+          } else throw 0;
+          }
+        } catch {
+          const fb = waDefault ? buildWa(waDefault) : waBase;
+          setStatus("err", `<strong>No se pudo enviar.</strong> Prob\u00E1 de nuevo o escribinos directo por <a class="wa-link" href="${fb}" target="_blank" rel="noopener noreferrer">WhatsApp</a>.`);
+        } finally { if (submitBtn) { submitBtn.disabled = false; submitBtn.textContent = "Enviar consulta"; } }
+      });
+    };
+    if ("IntersectionObserver" in window) {
+      const io2 = new IntersectionObserver((entries) => { if (entries.some((e) => e.isIntersecting)) { bind(); io2.disconnect(); } }, { rootMargin: "200px" });
+      io2.observe(form);
+    }
+    form.addEventListener("focusin", bind, { once: true });
+    form.addEventListener("mouseenter", bind, { once: true });
+    setTimeout(bind, 6000);
+  });
+</script>

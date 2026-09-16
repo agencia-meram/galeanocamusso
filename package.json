@@ -1,0 +1,25 @@
+{
+  "name": "doble-partida-estudio-contable",
+  "type": "module",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Landing de Estudio Doble Partida — estudio contable de dos contadoras argentinas (Astro, SEO + IA, WhatsApp y mail gratuito).",
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "og": "node scripts/og.mjs"
+  },
+  "dependencies": {
+    "@astrojs/sitemap": "^3.4.1",
+    "@fontsource/fraunces": "^5.2.6",
+    "@fontsource/lora": "^5.3.0",
+    "@fontsource/manrope": "^5.2.6",
+    "@fontsource/montserrat": "^5.3.0",
+    "astro": "^5.16.0"
+  },
+  "devDependencies": {
+    "@resvg/resvg-js": "^2.6.2",
+    "sharp": "^0.35.4"
+  }
+}

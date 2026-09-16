@@ -1,0 +1,144 @@
+---
+// Componente SEO: meta tags, Open Graph, Twitter, canonical, robots y
+// datos estructurados (JSON-LD) para Google y para indexación por IA.
+import { SITE, CONTACT, FAQS, SERVICES } from "../config";
+
+interface Props {
+  title?: string;
+  description?: string;
+  image?: string;
+  type?: string;
+  noindex?: boolean;
+}
+
+const { title, description, image, type = "website", noindex = false } = Astro.props;
+
+const pageTitle = title
+  ? `${title} · ${SITE.name}`
+  : `Estudio Contable Galeano & Camusso | Contadoras Públicas en Argentina`;
+
+const pageDesc = description ?? SITE.description;
+const ogImage = image ?? `${SITE.url}/og.png`;
+
+// ----- Datos estructurados: Estudio (ProfessionalService) -----
+const professionalService = {
+  "@context": "https://schema.org",
+  "@type": "ProfessionalService",
+  "@id": `${SITE.url}/#estudio`,
+  name: "Estudio Contable Galeano & Camusso",
+  description: SITE.description,
+  url: SITE.url,
+  image: ogImage,
+  logo: `${SITE.url}/favicon.svg`,
+  telephone: CONTACT.whatsappDisplay,
+  email: CONTACT.contactEmail,
+  address: {
+    "@type": "PostalAddress",
+    addressCountry: "AR",
+  },
+  areaServed: { "@type": "Country", name: "Argentina" },
+  knowsAbout: SITE.keywords,
+  openingHoursSpecification: {
+    "@type": "OpeningHoursSpecification",
+    dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+    opens: "09:00",
+    closes: "18:00",
+  },
+  hasOfferCatalog: {
+    "@type": "OfferCatalog",
+    name: "Servicios contables",
+    itemListElement: SERVICES.map((s, i) => ({
+      "@type": "Offer",
+      position: i + 1,
+      itemOffered: {
+        "@type": "Service",
+        name: s.title,
+        description: s.desc,
+      },
+    })),
+  },
+  founder: [
+    {
+      "@type": "Person",
+      name: "Jennifer Galeano",
+      jobTitle: "Contadora Pública",
+      worksFor: { "@id": `${SITE.url}/#estudio` },
+    },
+    {
+      "@type": "Person",
+      name: "Carla Camusso",
+      jobTitle: "Contadora Pública",
+      worksFor: { "@id": `${SITE.url}/#estudio` },
+    },
+  ],
+};
+
+// ----- Datos estructurados: Preguntas frecuentes (FAQPage) -----
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: FAQS.map((f) => ({
+    "@type": "Question",
+    name: f.q,
+    acceptedAnswer: { "@type": "Answer", text: f.a },
+  })),
+};
+
+// ----- Datos estructurados: Sitio -----
+const webSiteSchema = {
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "@id": `${SITE.url}/#website`,
+  name: SITE.name,
+  url: SITE.url,
+  inLanguage: "es-AR",
+  publisher: { "@id": `${SITE.url}/#estudio` },
+};
+---
+
+<!doctype html>
+<html lang="es-AR" dir="ltr">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="generator" content={Astro.generator} />
+
+    <title>{pageTitle}</title>
+    <meta name="description" content={pageDesc} />
+    <meta name="author" content={SITE.name} />
+    <meta name="robots" content={noindex ? "noindex, nofollow" : "index, follow, max-image-preview:large"} />
+    <meta name="theme-color" content="#0f2436" />
+    <link rel="canonical" href={`${SITE.url}${Astro.url.pathname}`.toLowerCase()} />
+
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="apple-touch-icon" href="/favicon.svg" />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content={type} />
+    <meta property="og:site_name" content={SITE.name} />
+    <meta property="og:locale" content="es_AR" />
+    <meta property="og:title" content={pageTitle} />
+    <meta property="og:description" content={pageDesc} />
+    <meta property="og:url" content={`${SITE.url}${Astro.url.pathname}`} />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content={`${SITE.name} — ${SITE.tagline}`} />
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={pageTitle} />
+    <meta name="twitter:description" content={pageDesc} />
+    <meta name="twitter:image" content={ogImage} />
+
+    <!-- Datos estructurados -->
+    <script type="application/ld+json" set:html={JSON.stringify(professionalService)} />
+    <script type="application/ld+json" set:html={JSON.stringify(faqSchema)} />
+    <script type="application/ld+json" set:html={JSON.stringify(webSiteSchema)} />
+
+    <slot name="head" />
+  </head>
+  <body>
+    <slot />
+  </body>
+</html>

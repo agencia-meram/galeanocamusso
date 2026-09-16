@@ -1,0 +1,77 @@
+---
+import { TEAM } from "../config";
+---
+
+<section class="section section--qs" id="estudio" aria-labelledby="estudio-title">
+  <div class="container">
+    <div class="qs-header reveal">
+      <p class="qs-eyebrow">Quiénes somos</p>
+      <div class="qs-head">
+        <h2 id="estudio-title" class="qs-title">Contadoras Públicas con <span>más de 10 años</span> de experiencia</h2>
+        <div class="qs-desc">
+          <p>Somos un equipo de <strong>Contadoras Públicas</strong> con <strong>más de 10 años de experiencia</strong> en el ámbito contable e impositivo.</p>
+          <p>Nos especializamos en <strong>liquidación de impuestos</strong> nacionales y provinciales, <strong>liquidación de sueldos</strong> y <strong>contabilidad</strong>, brindando asesoramiento integral a <strong>PyMEs</strong>, <strong>monotributistas</strong> y responsables inscriptos.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="qs-grid reveal" style="--rd:.12s">
+      <article class="qs-mission">
+        <div class="qs-mission-top">
+          <span class="qs-mission-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8"/><path d="M12 8v5l2 2"/><path d="M8.5 12.5l2.5 2.5 4.5-5"/></svg>
+          </span>
+          <h3>Nuestra misión</h3>
+        </div>
+        <p class="qs-mission-text">Nuestra misión es acompañar a emprendedores y empresas en cada etapa de su crecimiento, brindando asesoramiento contable e impositivo claro, ordenado y profesional.</p>
+        <p class="qs-mission-highlight">Ordená tus obligaciones. Tomá mejores decisiones. Viví tu negocio con más tranquilidad.</p>
+        <p class="qs-mission-close">Si necesitás asesoramiento, estamos para acompañarte.</p>
+      </article>
+
+      <div class="qs-side">
+        <article class="qs-card">
+          <p class="qs-card-kicker">Enfoque</p>
+          <h4>Orden, claridad y tranquilidad</h4>
+          <p>Acompañamiento continuo para que tengas tus obligaciones al día y tomes decisiones con seguridad.</p>
+        </article>
+        <article class="qs-card qs-card--accent">
+          <p class="qs-card-kicker">Experiencia</p>
+          <div class="qs-big"><span class="qs-big-num">+10</span><span class="qs-big-label">años</span></div>
+          <p>Trabajando junto a PyMEs, emprendedores y monotributistas.</p>
+        </article>
+      </div>
+    </div>
+
+    <div class="qs-team-head reveal" style="--rd:.18s">
+      <p class="section-index">Nuestro equipo</p>
+      <h3>Quiénes somos</h3>
+    </div>
+
+    <div class="team-grid">
+      {TEAM.map((t, i) => (
+        <article class="team-card reveal" style={`--rd:${i * 0.12}s`}>
+          <div class={`team-photo ${t.initials === "JG" || t.initials === "CC" ? "team-photo--image" : ""}`}>
+            {t.initials === "JG" ? (
+              <img src="/jennifer.jpg" alt={`Foto de ${t.name}`} width="600" height="450" loading="lazy" decoding="async" />
+            ) : t.initials === "CC" ? (
+              <img src="/carla.jpg" alt={`Foto de ${t.name}`} width="600" height="450" loading="lazy" decoding="async" />
+            ) : (
+              <span class="monogram" aria-hidden="true">{t.initials}</span>
+            )}
+            <a class="team-in-badge" href={t.linkedin} target="_blank" rel="noopener noreferrer" aria-label={`LinkedIn de ${t.name}`} title="LinkedIn">
+              <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M4.98 3.5A2.49 2.49 0 0 1 2.5 6a2.49 2.49 0 0 1-2.5-2.5A2.49 2.49 0 0 1 4.98 3.5zM.5 8.75h4.96V23.5H.5V8.75zM8.46 8.75h4.75v2.03h.07c.66-1.2 2.27-2.47 4.67-2.47 5 0 5.92 3.29 5.92 7.57v7.62h-4.95v-6.75c0-1.61-.03-3.68-2.24-3.68-2.24 0-2.59 1.75-2.59 3.56v6.87H8.46V8.75z" /></svg>
+            </a>
+          </div>
+          <div class="team-info">
+            <h3>{t.name}</h3>
+            <p class="team-role">{t.role}</p>
+            <p class="team-bio">{t.bio}</p>
+            <ul class="team-focus" aria-label="Especialidades">
+              {t.focus.map((f) => <li>{f}</li>)}
+            </ul>
+          </div>
+        </article>
+      ))}
+    </div>
+  </div>
+</section>
