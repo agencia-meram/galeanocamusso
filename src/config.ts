@@ -23,14 +23,20 @@ export const SITE = {
 
 
 export const CONTACT = {
-  whatsappNumber: "5491155917052",
-  whatsappDisplay: "+54 9 11 5591-7052",
+  whatsappNumber: "5491172439089",
+  whatsappDisplay: "+54 9 11 7243-9089",
   whatsappDefaultMessage:
-    "Hola 👋 vengo del sitio de Galeano & Camusso. Quería consultar por un presupuesto.",
+    "Hola vengo del sitio de Galeano & Camusso. Quería consultar por un presupuesto.",
   contactEmail: "info@gcestudio.com.ar",
   schedule: "Lunes a viernes · 9 a 18 hs",
   instagram: "https://instagram.com/galeanoCamusso",
   linkedin: "https://www.linkedin.com/company/galeano-Camusso",
+};
+
+export const LEGAL = {
+  cuit: "",
+  domicilioLegal: "",
+  titular: "Galeano & Camusso",
 };
 
 export const FORM = {
@@ -51,7 +57,7 @@ export const TEAM = [
     name: "Dra. Jennifer Galeano",
     role: "Contadora Pública",
     initials: "JG",
-    credential: "CPCECABA · Tº 401, Fº 122",
+    credential: "",
     bio: "Más de 12 años de experiencia en asesoramiento contable, impositivo y de gestión para PyMEs y emprendedores. Especialista en auditorías, cierres de ejercicio y planificación fiscal.",
     focus: ["Auditorías", "Impuestos", "Certificación de ingresos"],
     linkedin: "https://ar.linkedin.com/in/jennifer-daiana-galeano-b6a79b136",
@@ -60,7 +66,7 @@ export const TEAM = [
     name: "Dra. Carla Camusso",
     role: "Contadora Pública",
     initials: "CC",
-    credential: "CPCECABA · Tº 402, Fº 87",
+    credential: "",
     bio: "Especialista en liquidación de sueldos, asesoramiento impositivo y outsourcing contable. Gestión ordenada, documentación al día y reportes claros para facilitar la toma de decisiones.",
     focus: ["Liquidación de sueldos", "Impuestos", "Certificación de ingresos"],
     linkedin: "http://ar.linkedin.com/in/carla-camusso-b610572a9",
