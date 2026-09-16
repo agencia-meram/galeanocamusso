@@ -1,0 +1,30 @@
+---
+import { PROCESS } from "../config";
+---
+
+<section class="section" id="proceso" aria-labelledby="proceso-title">
+  <div class="container">
+    <div class="section-head section-head--center reveal">
+      <p class="eyebrow">Cómo trabajamos</p>
+      <h2 id="proceso-title">Un proceso <em>claro y ordenado</em></h2>
+      <p class="lede">
+        Un proceso simple que empieza con una consulta sin cargo y termina con tus
+        papeles en orden todos los meses.
+      </p>
+    </div>
+
+    <div class="process-steps">
+      {PROCESS.map((p) => (
+        <div class="process-step reveal" data-n={p.n} style={`--rd:${(Number(p.n) - 1) * 0.1}s`}>
+          <h3>{p.title}</h3>
+          <p>{p.desc}</p>
+        </div>
+      ))}
+    </div>
+
+    <div class="process-cta reveal">
+      <a class="btn btn-primary" href="#contacto" aria-label="Ir al formulario de contacto para solicitar la primera consulta">Solicitar primera consulta</a>
+      <span>Sin cargo y sin compromiso: la primera consulta es sin costo.</span>
+    </div>
+  </div>
+</section>

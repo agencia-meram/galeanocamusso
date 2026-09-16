@@ -1,0 +1,25 @@
+# Galeano & Camusso — Estudio Contable
+
+> Estudio Contable Galeano & Camusso. Contadoras Públicas con más de 10 años de experiencia. Asesoramiento contable e impositivo, liquidación de impuestos nacionales y provinciales, liquidación de sueldos y contabilidad para PyMEs, monotributistas y responsables inscriptos. Auditoría y outsourcing. Atención online para todo el país.
+
+## Información clave
+- Nombre: Estudio Contable Galeano & Camusso
+- Tipo: Estudio contable (ProfessionalService)
+- País: Argentina
+- Modalidad: Atención online para todo el país · Cita presencial a coordinar
+- Servicios: Asesoramiento Contable, Auditoría, Asesoramiento Impositivo, Liquidación de Sueldos, Outsourcing
+- Contacto: +54 9 11 5591-7052 (WhatsApp) · info@gcestudio.com.ar
+- Horario: Lunes a viernes, 9 a 18 hs
+
+## Páginas
+- [https://www.galeanocamusso.com.ar/](https://www.galeanocamusso.com.ar/): Página principal. Presenta al estudio, servicios, proceso de trabajo, preguntas frecuentes y contacto.
+
+## Servicios
+1. **Asesoramiento Contable** — Registración, cierres de ejercicio y balances.
+2. **Auditoría** — Auditorías operativas y análisis de balances.
+3. **Asesoramiento Impositivo** — Liquidación de impuestos nacionales y provinciales, planificación fiscal.
+4. **Liquidación de Sueldos** — Recibos, cargas sociales, ART y normativa laboral.
+5. **Outsourcing** — Tercerización contable y administrativa.
+
+## Datos estructurados
+El sitio incluye esquemas JSON-LD de tipo ProfessionalService, Person (fundadoras) y FAQPage.

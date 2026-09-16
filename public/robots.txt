@@ -1,0 +1,5 @@
+# robots.txt — Galeano & Camusso
+User-agent: *
+Allow: /
+
+Sitemap: https://www.galeanocamusso.com.ar/sitemap-index.xml
