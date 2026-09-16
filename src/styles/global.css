@@ -550,6 +550,15 @@ button, input, select, textarea { font: inherit; color: inherit; }
 .form-status .wa-link { color: inherit; text-decoration: underline; font-weight: 700; }
 .form-submit-row { grid-column: 1/-1; display: flex; align-items: center; gap: 1rem; flex-wrap: wrap; }
 .form-submit-row .btn { min-width: 180px; }
+.btn.is-loading { pointer-events: none; opacity: .92; }
+.btn-spinner { width: 1.05em; height: 1.05em; border: 2px solid rgba(255,255,255,.38); border-top-color: #fff; border-radius: 50%; animation: btn-spin .62s linear infinite; display: inline-block; flex: none; }
+.btn-dots { display: inline-flex; margin-left: .02em; }
+.btn-dots i { font-style: normal; animation: btn-dot 1.15s infinite; opacity: .35; }
+.btn-dots i:nth-child(2) { animation-delay: .14s; }
+.btn-dots i:nth-child(3) { animation-delay: .28s; }
+@keyframes btn-spin { to { transform: rotate(360deg); } }
+@keyframes btn-dot { 0%, 80%, 100% { opacity: .32; transform: translateY(0); } 40% { opacity: 1; transform: translateY(-1px); } }
+@media (prefers-reduced-motion: reduce) { .btn-spinner, .btn-dots i { animation: none; } .btn-dots i { opacity: 1; } }
 .form-alternative { font-size: 0.82rem; color: var(--ink-faint); }
 .form-alternative a { color: var(--brand); font-weight: 700; text-decoration: underline; text-underline-offset: 2px; transition: color 0.3s var(--ease); }
 .form-alternative a:hover { color: var(--brand-deep); }

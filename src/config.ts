@@ -1,7 +1,7 @@
 export const SITE = {
   name: "Galeano & Camusso",
   tagline: "Estudio Contable",
-  url: "https://www.galeanocamusso.com.ar",
+  url: "https://www.gcestudio.com.ar",
   locale: "es-AR",
   country: "AR",
   address: "Atención online para todo el país · Cita presencial a coordinar",
@@ -34,7 +34,7 @@ export const CONTACT = {
 };
 
 export const FORM = {
-  endpoint: "https://script.google.com/macros/s/AKfycbzUFluEfymkxzT_4ZdIatdO1P-YjmfbERIBSFzegzPgKpldeNVpCAfa_Pk-ekGdrWyy/exec",
+  endpoint: "https://script.google.com/macros/s/AKfycbySalgEiAP5Zy1nmYaBFgwh3yAJEDdoRfrgqn8VteKtl7ytlE2m32DfZMbxpd844SxsNQ/exec",
   subject: "Nuevo mensaje desde el sitio web",
 };
 

@@ -110,16 +110,34 @@ const { title, description } = Astro.props;
       const subject = form.dataset.subject;
       const buildWa = (msg) => `${waBase.split("?")[0]}?text=${encodeURIComponent(msg)}`;
       const setStatus = (k, h) => { if (statusEl) { statusEl.className = `form-status ${k}`; statusEl.innerHTML = h; } };
+      let restoreTimer = null;
+      const originalBtnHTML = submitBtn ? submitBtn.innerHTML : "";
+      const setLoading = (on) => {
+        if (!submitBtn) return;
+        if (on) {
+          submitBtn.disabled = true;
+          submitBtn.classList.add("is-loading");
+          submitBtn.setAttribute("aria-busy", "true");
+          submitBtn.innerHTML = `<span class="btn-spinner" aria-hidden="true"></span> Enviando<span class="btn-dots" aria-hidden="true"><i>.</i><i>.</i><i>.</i></span>`;
+        } else {
+          submitBtn.disabled = false;
+          submitBtn.classList.remove("is-loading");
+          submitBtn.removeAttribute("aria-busy");
+          submitBtn.innerHTML = originalBtnHTML;
+        }
+      };
       form.addEventListener("submit", async (e) => {
         e.preventDefault();
         if (!form.checkValidity()) { form.reportValidity(); return; }
+        if (restoreTimer) clearTimeout(restoreTimer);
         const data = new FormData(form);
         const rawNombre = (data.get("Nombre")?.toString().trim() || "Sin nombre");
         const nombreCompleto = rawNombre.split(/\s+/).map(w=>w.charAt(0).toUpperCase()+w.slice(1).toLowerCase()).join(" ");
         const dynamicSubject = `Nuevo mensaje de ${nombreCompleto} desde el sitio web`;
         data.append("_subject", dynamicSubject);
         data.append("_template", "table");
-        if (submitBtn) { submitBtn.disabled = true; submitBtn.textContent = "Enviando…"; }
+        const t0 = Date.now();
+        setLoading(true);
         try {
           const isAppsScript = endpoint && endpoint.includes("script.google.com");
           if (isAppsScript) {
@@ -138,10 +156,18 @@ const { title, description } = Astro.props;
             form.reset();
           } else throw 0;
           }
+          const elapsed = Date.now() - t0;
+          const minTotal = 850;
+          const extra = 380;
+          const delay = Math.max(extra, minTotal - elapsed);
+          restoreTimer = setTimeout(() => setLoading(false), delay);
         } catch {
           const fb = waDefault ? buildWa(waDefault) : waBase;
           setStatus("err", `<strong>No se pudo enviar.</strong> Prob\u00E1 de nuevo o escribinos directo por <a class="wa-link" href="${fb}" target="_blank" rel="noopener noreferrer">WhatsApp</a>.`);
-        } finally { if (submitBtn) { submitBtn.disabled = false; submitBtn.textContent = "Enviar consulta"; } }
+          const elapsed = Date.now() - t0;
+          const delay = Math.max(320, 850 - elapsed);
+          restoreTimer = setTimeout(() => setLoading(false), delay);
+        }
       });
     };
     if ("IntersectionObserver" in window) {

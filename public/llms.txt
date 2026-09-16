@@ -12,7 +12,7 @@
 - Horario: Lunes a viernes, 9 a 18 hs
 
 ## Páginas
-- [https://www.galeanocamusso.com.ar/](https://www.galeanocamusso.com.ar/): Página principal. Presenta al estudio, servicios, proceso de trabajo, preguntas frecuentes y contacto.
+- [https://www.gcestudio.com.ar/](https://www.gcestudio.com.ar/): Página principal. Presenta al estudio, servicios, proceso de trabajo, preguntas frecuentes y contacto.
 
 ## Servicios
 1. **Asesoramiento Contable** — Registración, cierres de ejercicio y balances.
