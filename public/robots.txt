@@ -2,4 +2,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://www.galeanocamusso.com.ar/sitemap-index.xml
+Sitemap: https://www.gcestudio.com.ar/sitemap-index.xml

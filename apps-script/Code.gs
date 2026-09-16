@@ -1,14 +1,15 @@
 /**
- * Doble Partida - Google Apps Script
+ * Galeano & Camusso / GC Estudio - Google Apps Script
  * 1. Ir a script.google.com -> Nuevo proyecto -> Pegar este código
  * 2. Servicio -> Gmail API ya viene habilitado via GmailApp
  * 3. Implementar -> Nueva implementación -> Tipo: Aplicación web
- *    Ejecutar como: Yo (marcosvav03@gmail.com)
+ *    Ejecutar como: Yo (info@gcestudio.com.ar)
  *    Quién tiene acceso: Cualquier persona
  * 4. Copiar URL /exec y pegarla en src/config.ts -> FORM.endpoint
+ *    URL actual: https://script.google.com/macros/s/AKfycbySalgEiAP5Zy1nmYaBFgwh3yAJEDdoRfrgqn8VteKtl7ytlE2m32DfZMbxpd844SxsNQ/exec
  */
 
-const DESTINO = "marcosvav03@gmail.com";
+const DESTINO = "info@gcestudio.com.ar";
 
 function capitalizar(str) {
   return String(str || "Sin nombre")
@@ -77,7 +78,7 @@ function doPost(e) {
       + "<tr><td style='padding:14px 20px;border-bottom:1px solid #ece2cc;color:#5b574e;font-weight:700'>Servicio</td><td style='padding:14px 20px;border-bottom:1px solid #ece2cc'>" + (servicio || "—") + "</td></tr>"
       + "<tr><td style='padding:14px 20px;color:#5b574e;font-weight:700;vertical-align:top'>Mensaje</td><td style='padding:14px 20px;white-space:pre-wrap'>" + mensaje.replace(/</g,"&lt;") + "</td></tr>"
       + "</table>"
-      + "<div style='padding:14px 20px;background:#f5efe1;font-size:12px;color:#5b574e'>Enviado desde dobleepartida.com.ar · Responder directamente a " + email + "</div>"
+       + "<div style='padding:14px 20px;background:#f5efe1;font-size:12px;color:#5b574e'>Enviado desde gcestudio.com.ar · Responder directamente a " + email + "</div>"
       + "</div>"
       + "</div>";
 
@@ -86,7 +87,7 @@ function doPost(e) {
     GmailApp.sendEmail(DESTINO, subject, plain, {
       htmlBody: htmlBody,
       replyTo: email,
-      name: "Doble Partida Web"
+      name: "GC Estudio Web"
     });
 
     return ContentService.createTextOutput(JSON.stringify({ success: "true" }))

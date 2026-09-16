@@ -1,0 +1,36 @@
+---
+import Base from "../layouts/Base.astro";
+import { SITE, CONTACT, LEGAL, TEAM } from "../config";
+---
+
+<Base title="Términos y Aviso Legal" description={`Términos, Aviso Legal e identificación del prestador de ${SITE.name}.`}>
+  <article class="legal-page">
+    <p class="eyebrow">Legal · Actualizado {new Date().toLocaleDateString("es-AR")}</p>
+    <h1>Términos y Aviso Legal</h1>
+
+    <h2>Identificación del prestador</h2>
+    <p><strong>{LEGAL.titular}</strong>{LEGAL.cuit ? ` · CUIT ${LEGAL.cuit}` : " · CUIT en trámite"}<br />{LEGAL.domicilioLegal ? `${LEGAL.domicilioLegal}` : "Domicilio legal en trámite"} · {SITE.address}<br />Contacto: <a href={`mailto:${CONTACT.contactEmail}`}>{CONTACT.contactEmail}</a> · {CONTACT.whatsappDisplay}</p>
+    <p>Contadoras: {TEAM.map(t => `${t.name}${t.credential ? ` (${t.credential})` : " (Matrícula en trámite)"}`).join(" · ")}.</p>
+    <p style="font-size:.82rem;color:var(--ink-faint)">Las matrículas se encuentran en trámite ante el CPCE correspondiente. Se actualizarán en este sitio una vez otorgadas.</p>
+
+    <h2>Objeto</h2>
+    <p>Este sitio presenta los servicios de asesoramiento contable, impositivo, laboral y outsourcing del estudio y permite solicitar contacto.</p>
+
+    <h2>Condiciones de uso</h2>
+    <ul>
+      <li>El contenido es informativo y no constituye asesoramiento profesional vinculante para un caso concreto.</li>
+      <li>Te comprometés a usar el sitio y el formulario de forma lícita y sin enviar contenido ilícito o spam.</li>
+    </ul>
+
+    <h2>Propiedad intelectual</h2>
+    <p>Textos, logos y diseño son titularidad de {SITE.name}. No se permite su reproducción sin autorización.</p>
+
+    <h2>Limitación de responsabilidad</h2>
+    <p>Hacemos esfuerzos por mantener la información actualizada, pero no garantizamos ausencia de errores. El estudio no responde por daños derivados del uso del sitio o de información de terceros enlazada.</p>
+
+    <h2>Legislación y jurisdicción</h2>
+    <p>Relación sujeta a leyes de la República Argentina. Para consumidores, podés acudir a Defensa del Consumidor: <a href="https://www.argentina.gob.ar/produccion/defensadelconsumidor/formulario" target="_blank" rel="noopener noreferrer">formulario oficial</a>.</p>
+
+    <p style="margin-top:2rem"><a href="/">← Volver al inicio</a> · <a href="/privacidad">Política de Privacidad</a></p>
+  </article>
+</Base>

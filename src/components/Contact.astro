@@ -103,6 +103,11 @@ const services = [
               <textarea id="f-msg" name="Mensaje" required placeholder="Necesito asesoramiento por una inspección / auditoría / liquidación…"></textarea>
             </div>
             <p class="form-note">* Campos obligatorios. Tus datos se usan solo para responderte.</p>
+            <label class="form-privacy">
+              <input type="checkbox" id="f-privacy" name="Privacidad" value="Aceptada" required />
+              <span>He leído y acepto la <a href="/privacidad" target="_blank" rel="noopener noreferrer">Política de Privacidad</a> <span aria-hidden="true">*</span></span>
+            </label>
+            <p class="form-legal">Al enviar este formulario aceptás el tratamiento de tus datos personales (nombre, teléfono, email y mensaje) únicamente para responder a tu consulta, conforme a la Ley 25.326 de Protección de Datos Personales. Podés ejercer tus derechos de acceso, rectificación o supresión escribiendo a <a href={`mailto:${CONTACT.contactEmail}`}>{CONTACT.contactEmail}</a>. Ver <a href="/privacidad" target="_blank" rel="noopener noreferrer">Política de Privacidad</a>.</p>
             <div class="form-status" id="form-status" role="status" aria-live="polite"></div>
             <div class="form-submit-row">
               <button class="btn btn-primary" type="submit" id="form-submit">
@@ -112,7 +117,7 @@ const services = [
                 </svg>
               </button>
               <span class="form-alternative">
-                ¿Más rápido? <a href={whatsappLink("Hola 👋 Quería consultar por un presupuesto rápido desde el formulario.")} target="_blank" rel="noopener noreferrer" aria-label="Escribir por WhatsApp por presupuesto rápido">escribinos por WhatsApp</a>
+                ¿Más rápido? <a href={whatsappLink("Hola Quería consultar por un presupuesto rápido desde el formulario.")} target="_blank" rel="noopener noreferrer" aria-label="Escribir por WhatsApp por presupuesto rápido">escribinos por WhatsApp</a>
               </span>
             </div>
           </div>
