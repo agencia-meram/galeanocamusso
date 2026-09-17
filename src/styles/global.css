@@ -582,10 +582,11 @@ button, input, select, textarea { font: inherit; color: inherit; }
 .footer-bottom .legal { display: flex; gap: 1.2rem; flex-wrap: wrap; }
 .footer-bottom a:hover { color: #fff; transition: color 0.3s var(--ease); }
 
-/* ---------- WhatsApp flotante ---------- */
+/* ---------- WhatsApp flotante (visible en TODO mobile 320-768px, sin cortes) ---------- */
 .wa-float {
-  position: fixed; right: 1.35rem; bottom: 1.35rem; z-index: 90;
-  display: inline-flex; align-items: center; gap: 0.6rem;
+  position: fixed; right: 1.35rem; bottom: calc(1.35rem + env(safe-area-inset-bottom, 0px)); z-index: 90;
+  display: inline-flex !important; align-items: center; gap: 0.6rem;
+  opacity: 1 !important; visibility: visible !important; pointer-events: auto !important;
   background: var(--whatsapp); color: #fff; padding: 1rem 1.4rem;
   border-radius: 999px; font-weight: 700; font-size: 0.95rem;
   box-shadow: 0 14px 34px -12px rgba(140, 86, 212, 0.55);
@@ -615,11 +616,93 @@ button, input, select, textarea { font: inherit; color: inherit; }
 @media (max-width: 900px) {
   .nav-links { display: none; }
   .nav-toggle { display: grid; }
-  .nav-links.open { display: grid; position: absolute; top: 100%; left: 0; right: 0; background: #fff; border-bottom: 1px solid var(--line); padding: 1.2rem var(--gutter) 1.6rem; gap: 0.4rem; box-shadow: 0 24px 40px -24px rgba(11, 23, 63, 0.3); }
-  .nav-links.open a { display: block; padding: 0.7rem 0.2rem; font-size: 1rem; }
   .about-grid, .faq-grid, .contact-grid, .qs-head, .qs-grid { grid-template-columns: 1fr; }
   .faq-sticky-note { position: static; }
   .footer-grid { grid-template-columns: 1fr 1fr; }
+}
+/* Tablet dropdown (769-900px) — keep original partial overlay, not full-screen */
+@media (max-width: 900px) and (min-width: 769px) {
+  .nav-links.open {
+    display: grid;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: #fff;
+    border-bottom: 1px solid var(--line);
+    padding: 1.2rem var(--gutter) 1.6rem;
+    gap: 0.4rem;
+    box-shadow: 0 24px 40px -24px rgba(11, 23, 63, 0.3);
+  }
+  .nav-links.open a { display: block; padding: 0.7rem 0.2rem; font-size: 1rem; }
+}
+
+/* === MOBILE ONLY FIXES (≤768px) === */
+@media (max-width: 768px) {
+  /* El overlay opaco del menú (z-200) tapa al FAB (z-90) solo mientras está abierto,
+     sin reglas de ocultado que puedan trabarse */
+  /* padding to avoid FAB overlapping content */
+  #servicios { padding-bottom: calc(var(--section-pad) + 96px) !important; }
+  #preguntas { padding-bottom: calc(var(--section-pad) + 96px) !important; }
+  #contacto  { padding-bottom: calc(var(--section-pad) + 96px) !important; }
+
+  /* Full-viewport menu overlay — header itself becomes the overlay (avoids backdrop-filter containing-block bug) */
+  .site-header.menu-open {
+    position: fixed;
+    inset: 0;
+    width: 100vw;
+    height: 100vh;
+    height: 100dvh;
+    background: var(--bg);
+    z-index: 200;
+    overflow-y: auto;
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    border-bottom: none;
+    display: block;
+  }
+  /* BLOQUE 1: barra header (logo+nombre izq, X der) — misma altura/padding que el header normal */
+  .site-header.menu-open .header-inner {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    flex: none;
+  }
+  /* .nav es flex-row por defecto y mezclaría ul+toggle en la misma fila:
+     se aplana para reordenar sus hijos dentro de .header-inner */
+  .site-header.menu-open .nav { display: contents; }
+  .site-header.menu-open .brand { order: 1; }
+  .site-header.menu-open .nav-toggle { order: 2; }
+  .site-header.menu-open .nav-cta { display: none !important; }
+  /* BLOQUE 2: lista de links en columna, fila propia debajo del header */
+  .site-header.menu-open .nav-links.open {
+    order: 3;
+    flex: 1 1 100%;
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr;
+    position: static;
+    inset: auto;
+    height: auto;
+    background: transparent;
+    border: none;
+    border-top: 1px solid var(--line-soft);
+    margin-top: 0.6rem;
+    padding: 1rem var(--gutter) 2.5rem;
+    gap: 0.2rem;
+    box-shadow: none;
+    overflow: visible;
+    align-content: start;
+  }
+  .site-header.menu-open .nav-links.open li { list-style: none; }
+  .site-header.menu-open .nav-links.open a {
+    display: block;
+    padding: 0.9rem 0.2rem;
+    font-size: 1.06rem;
+  }
+  body.menu-open { overflow: hidden; }
 }
 
 @media (max-width: 620px) {
