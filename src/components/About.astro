@@ -9,8 +9,8 @@ import { TEAM } from "../config";
       <div class="qs-head">
         <h2 id="estudio-title" class="qs-title">Contadoras Públicas con <span>más de 10 años</span> de experiencia</h2>
         <div class="qs-desc">
-          <p>Somos un equipo de <strong>Contadoras Públicas</strong> con <strong>más de 10 años de experiencia</strong> en el ámbito contable e impositivo.</p>
-          <p>Nos especializamos en <strong>liquidación de impuestos</strong> nacionales y provinciales, <strong>liquidación de sueldos</strong> y <strong>contabilidad</strong>, brindando asesoramiento integral a <strong>PyMEs</strong>, <strong>monotributistas</strong> y responsables inscriptos.</p>
+          <p>Somos un equipo de <strong>Contadoras Públicas</strong> con más de 10 años de experiencia en el ámbito contable e impositivo.</p>
+          <p>Nos especializamos en liquidación de impuestos nacionales y provinciales, liquidación de sueldos y contabilidad, brindando asesoramiento integral a PyMEs, monotributistas y responsables inscriptos.</p>
         </div>
       </div>
     </div>
@@ -52,7 +52,7 @@ import { TEAM } from "../config";
         <article class="team-card reveal" style={`--rd:${i * 0.12}s`}>
           <div class={`team-photo ${t.initials === "JG" || t.initials === "CC" ? "team-photo--image" : ""}`}>
             {t.initials === "JG" ? (
-              <img src="/jennifer.jpg" alt={`Foto de ${t.name}`} width="600" height="450" loading="lazy" decoding="async" />
+              <img src="/jennifer.png" alt={`Foto de ${t.name}`} width="600" height="450" loading="lazy" decoding="async" style="object-fit:contain" />
             ) : t.initials === "CC" ? (
               <img src="/carla.jpg" alt={`Foto de ${t.name}`} width="600" height="450" loading="lazy" decoding="async" />
             ) : (

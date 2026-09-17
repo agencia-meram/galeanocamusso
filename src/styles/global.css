@@ -332,7 +332,8 @@ button, input, select, textarea { font: inherit; color: inherit; }
 .stat dt, .stat dd { margin: 0; }
 .stat dt { order: 1; }
 .stat dd { order: 2; }
-.stat b {
+.stat b,
+.stat .stat-num {
   display: block;
   font-family: var(--font-display);
   font-weight: 800;
@@ -342,7 +343,7 @@ button, input, select, textarea { font: inherit; color: inherit; }
   font-variant-numeric: tabular-nums;
   white-space: nowrap;
 }
-.stat b sup { font-family: var(--font-body); font-size: 0.82rem; font-weight: 700; color: var(--brand); vertical-align: super; }
+.stat b sup, .stat .stat-num sup { font-family: var(--font-body); font-size: 0.82rem; font-weight: 700; color: var(--brand); vertical-align: super; }
 .stat span { font-size: 0.74rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-faint); display: block; }
 
 /* ---------- Equipo / Estudio ---------- */
@@ -578,6 +579,10 @@ button, input, select, textarea { font: inherit; color: inherit; }
 .footer-contact a { color: #e0c8f5; font-size: 0.9rem; display: inline-flex; align-items: center; gap: 0.5rem; transition: color 0.3s var(--ease); }
 .footer-contact svg { width: 1em; height: 1em; color: #dc95ff; flex: none; }
 .footer-contact a:hover { color: #fff; }
+.footer-share { display: flex; align-items: center; gap: 1rem; flex-wrap: wrap; padding-bottom: 1.2rem; font-size: 0.78rem; color: #b9a0d6; }
+.footer-share span { font-weight: 800; letter-spacing: 0.1em; text-transform: uppercase; font-size: 0.68rem; color: #dc95ff; }
+.footer-share a { color: #e0c8f5; font-weight: 700; transition: color 0.3s var(--ease); }
+.footer-share a:hover { color: #fff; }
 .footer-bottom { border-top: 1px solid rgba(255, 255, 255, 0.12); padding-top: 1.5rem; display: flex; justify-content: space-between; align-items: center; gap: 1rem; flex-wrap: wrap; font-size: 0.76rem; color: #b9a0d6; }
 .footer-bottom .legal { display: flex; gap: 1.2rem; flex-wrap: wrap; }
 .footer-bottom a:hover { color: #fff; transition: color 0.3s var(--ease); }
