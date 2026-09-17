@@ -6,7 +6,7 @@ export const SITE = {
   country: "AR",
   address: "Atención online para todo el país · Cita presencial a coordinar",
   description:
-    "Estudio Contable Galeano & Camusso, Contadoras Públicas en Argentina. Asesoramiento contable e impositivo, liquidación de impuestos y sueldos, contabilidad, auditoría y outsourcing para PyMEs, empresas y profesionales de todo el país.",
+    "Estudio contable en Argentina: impuestos, sueldos, contabilidad y auditoría para PyMEs y profesionales. Primera consulta sin cargo.",
   keywords: [
     "estudio contable",
     "contadoras públicas",
