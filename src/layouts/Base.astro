@@ -71,6 +71,9 @@ const { title, description } = Astro.props;
       document.body.classList.remove("menu-open");
       siteHeader?.classList.remove("menu-open");
     }
+    // pausar/reanudar Lenis junto con el bloqueo de scroll
+    const lenis = window.__lenis;
+    if (lenis) open ? lenis.stop() : lenis.start();
   };
   toggle?.addEventListener("click", () => {
     const willOpen = !(navLinks?.classList.contains("open"));
@@ -90,6 +93,7 @@ const { title, description } = Astro.props;
     if (!window.matchMedia("(max-width: 768px)").matches) {
       document.body.classList.remove("menu-open");
       siteHeader?.classList.remove("menu-open");
+      window.__lenis?.start();
     }
   });
   // FAQ accordion — solo un ítem abierto a la vez (mobile mantiene animación)
@@ -101,6 +105,29 @@ const { title, description } = Astro.props;
       }
     });
   });
+</script>
+
+<script>
+  import Lenis from "lenis";
+  // Smooth scroll con Lenis — desactivado si el usuario prefiere movimiento reducido
+  if (!window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+    const lenis = new Lenis({ duration: 1.1, smoothWheel: true });
+    window.__lenis = lenis;
+    const raf = (time) => { lenis.raf(time); requestAnimationFrame(raf); };
+    requestAnimationFrame(raf);
+    // anchors internos (#contacto, #servicios…) con offset del header fijo
+    document.addEventListener("click", (e) => {
+      const a = e.target.closest('a[href^="#"]');
+      if (!a) return;
+      const id = a.getAttribute("href");
+      if (id.length < 2) return;
+      const target = document.querySelector(id);
+      if (!target) return;
+      e.preventDefault();
+      lenis.scrollTo(target, { offset: -92 });
+      history.replaceState(null, "", id);
+    });
+  }
 </script>
 
 <script>

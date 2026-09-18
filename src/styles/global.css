@@ -59,7 +59,12 @@
 *::before,
 *::after { box-sizing: border-box; }
 
-html { scroll-behavior: smooth; scroll-padding-top: 92px; -webkit-text-size-adjust: 100%; scrollbar-width: thin; scrollbar-color: var(--brand) var(--bg-soft); }
+html { scroll-padding-top: 92px; -webkit-text-size-adjust: 100%; scrollbar-width: thin; scrollbar-color: var(--brand) var(--bg-soft); }
+/* Lenis smooth scroll — recomendado por la librería (el JS maneja la suavidad) */
+html.lenis, html.lenis body { height: auto; }
+.lenis.lenis-smooth { scroll-behavior: auto !important; }
+.lenis.lenis-smooth [data-lenis-prevent] { overscroll-behavior: contain; }
+.lenis.lenis-stopped { overflow: hidden; }
 *::-webkit-scrollbar { width: 10px; height: 10px; }
 *::-webkit-scrollbar-track { background: var(--bg-soft); }
 *::-webkit-scrollbar-thumb { background: linear-gradient(180deg, var(--brand), var(--brand-deep)); border-radius: 999px; border: 2px solid var(--bg-soft); }
@@ -724,7 +729,9 @@ button, input, select, textarea { font: inherit; color: inherit; }
   .stat:nth-child(n+3) { border-top: 1px solid var(--line); }
   .stat { padding: 1.4rem 0.8rem; }
   .hero { padding-block: 2.2rem 3.2rem; }
-  .hero::before { height: 36px; }
+  /* ola intacta (curva visible) + la sección siguiente sube 1px para tapar la costura */
+  .hero::before { height: 36px; bottom: -1px; }
+  .stats-bar { margin-top: -1px; }
   .hero h1 { font-size: clamp(1.9rem, 8vw, 2.4rem); }
   .hero .lede { margin-bottom: 1.4rem; }
   .qs-side { display: none !important; }
