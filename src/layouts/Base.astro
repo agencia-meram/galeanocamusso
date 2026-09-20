@@ -15,12 +15,13 @@ import WhatsAppFloat from "../components/WhatsAppFloat.astro";
 interface Props {
   title?: string;
   description?: string;
+  noindex?: boolean;
 }
 
-const { title, description } = Astro.props;
+const { title, description, noindex = false } = Astro.props;
 ---
 
-<SEO {title} {description}>
+<SEO {title} {description} {noindex}>
   <slot name="head" slot="head" />
   <link slot="head" rel="preload" href={montW700} as="font" type="font/woff2" crossorigin />
   <link slot="head" rel="preload" href={montW800} as="font" type="font/woff2" crossorigin />

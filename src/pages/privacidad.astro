@@ -3,7 +3,7 @@ import Base from "../layouts/Base.astro";
 import { SITE, CONTACT, LEGAL } from "../config";
 ---
 
-<Base title="Política de Privacidad" description={`Política de Privacidad de ${SITE.name}. Tratamiento de datos personales conforme a la Ley 25.326.`}>
+<Base title="Política de Privacidad" description={`Política de Privacidad de ${SITE.name}. Tratamiento de datos personales conforme a la Ley 25.326.`} noindex>
   <article class="legal-page">
     <p class="eyebrow">Legal · Actualizado {new Date().toLocaleDateString("es-AR")}</p>
     <h1>Política de Privacidad</h1>

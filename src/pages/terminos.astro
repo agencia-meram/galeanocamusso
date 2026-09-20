@@ -3,7 +3,7 @@ import Base from "../layouts/Base.astro";
 import { SITE, CONTACT, LEGAL, TEAM } from "../config";
 ---
 
-<Base title="Términos y Aviso Legal" description={`Términos, Aviso Legal e identificación del prestador de ${SITE.name}.`}>
+<Base title="Términos y Aviso Legal" description={`Términos, Aviso Legal e identificación del prestador de ${SITE.name}.`} noindex>
   <article class="legal-page">
     <p class="eyebrow">Legal · Actualizado {new Date().toLocaleDateString("es-AR")}</p>
     <h1>Términos y Aviso Legal</h1>

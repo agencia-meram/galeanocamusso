@@ -8,7 +8,13 @@ export default defineConfig({
   site: SITE.url,
   output: "static",
   compressHTML: true,
-  integrations: [sitemap()],
+  integrations: [
+    sitemap({
+      // páginas legales con noindex: fuera del sitemap
+      filter: (page) =>
+        !page.endsWith("/privacidad/") && !page.endsWith("/terminos/"),
+    }),
+  ],
   trailingSlash: "ignore",
   build: {
     inlineStylesheets: "always",
