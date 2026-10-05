@@ -40,7 +40,7 @@ export const LEGAL = {
 };
 
 export const FORM = {
-  endpoint: "https://script.google.com/macros/s/AKfycbze5fokT6usvDBydLZ17UgMwr_diJE6pC3ugJ8CvTbxqyD1I-CfIbf2K63R9tSJIXUR-w/exec",
+  endpoint: "https://script.google.com/macros/s/AKfycbw65vLULPV5z5yqlSuumF7nm9clAbQhE2hE44wtRqvYt82NBa2lrhuKAwQtMF_tK-fJgw/exec",
   subject: "Nuevo mensaje desde el sitio web",
 };
 
